@@ -7,68 +7,178 @@
   <title>MIOKASTA — Electronic Artist</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Jost:wght@200;300;400;500&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20260810-6">
 </head>
 <body>
-  <div class="noise" aria-hidden="true"></div>
+  <div class="ambient" aria-hidden="true"></div>
   <header class="site-header">
-    <a class="wordmark" href="#top" aria-label="MIOKASTA home">MIOKASTA</a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span><span class="sr-only">Menu</span></button>
+    <a class="wordmark" href="#home" aria-label="MIOKASTA home">MIOKASTA</a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span class="sr-only">Menu</span></button>
     <nav id="site-nav" class="site-nav" aria-label="Main navigation">
-      <a href="#music">Music</a><a href="#about">About</a><a href="#live">Live</a><a href="#connect">Connect</a>
+      <a class="active" href="#home">Home</a><a href="#music">Music</a><a href="#videos">Live</a><a href="#booking">Booking</a>
     </nav>
+    <div class="header-actions">
+      <div class="social-icons service-icons" aria-label="Social links"><a href="https://open.spotify.com/artist/4Axv4C59OL7xrATnB699ff" target="_blank" rel="noopener" aria-label="Spotify"><img src="assets/icons/spotify.svg" alt=""></a><a href="https://www.instagram.com/miokasta_ofc" target="_blank" rel="noopener" aria-label="Instagram"><img src="assets/icons/instagram.svg" alt=""></a><a href="https://www.youtube.com/@miokasta" target="_blank" rel="noopener" aria-label="YouTube"><img src="assets/icons/youtube.svg" alt=""></a><a href="https://soundcloud.com/miokasta" target="_blank" rel="noopener" aria-label="SoundCloud"><img src="assets/icons/soundcloud.svg" alt=""></a></div>
+      <a class="contact-button" href="mailto:booking@miokasta.com">Contact</a>
+    </div>
   </header>
 
-  <main id="top">
-    <section class="hero section">
-      <div class="prism prism-one" aria-hidden="true"></div><div class="prism prism-two" aria-hidden="true"></div>
-      <div class="hero-copy reveal">
-        <p class="eyebrow">Electronic artist · DJ · producer</p>
-        <h1>Sound made<br>to <em>move</em> you.</h1>
-        <p class="hero-intro">Hypnotic rhythm, electric emotion and after-dark energy — created in Toronto, felt everywhere.</p>
-        <div class="hero-actions"><a class="button button-dark" href="#featured">Listen now <span>↗</span></a><a class="text-link" href="#live">Explore live sets <span>↓</span></a></div>
+  <main id="home" class="page-shell">
+    <section class="panel hero-panel reveal" aria-label="MIOKASTA introduction">
+      <button class="circle-arrow hero-prev" aria-label="Previous hero slide">‹</button>
+      <div class="hero-copy">
+        <p class="kicker">MELODIC PROGRESSIVE DEEP<br>HOUSE &amp; TECNHO</p>
+        <h1>MIOKASTA</h1>
+        <p class="hero-statement">Progressive sound.<br>Emotional energy.<br>A journey through rhythm and atmosphere.</p>
+        <div class="button-row"><a class="button button-black" href="#latest">Listen</a><a class="button button-ghost" href="#booking">Book</a></div>
+        <div class="platform-line service-pills"><a href="https://open.spotify.com/artist/4Axv4C59OL7xrATnB699ff" target="_blank" rel="noopener"><img src="assets/icons/spotify.svg" alt="">Spotify</a><a href="https://www.beatport.com/artist/miokasta/874134" target="_blank" rel="noopener"><img src="assets/icons/beatport.svg" alt="">Beatport</a><a href="https://soundcloud.com/miokasta" target="_blank" rel="noopener"><img src="assets/icons/soundcloud.svg" alt="">SoundCloud</a><a href="https://www.youtube.com/@miokasta" target="_blank" rel="noopener"><img src="assets/icons/youtube.svg" alt="">YouTube</a><a href="https://www.instagram.com/miokasta_ofc" target="_blank" rel="noopener"><img src="assets/icons/instagram.svg" alt="">Instagram</a></div>
       </div>
-      <div class="hero-orbit reveal" aria-hidden="true"><div class="orb"><div class="orb-core">M</div></div><span class="orbit-label">TORONTO · 43.6532° N ·</span></div>
-      <div class="scroll-note">Scroll to enter the frequency</div>
+      <div class="hero-portrait">
+        <div class="prism-ring ring-one"></div><div class="prism-ring ring-two"></div><div class="lens-flare"></div>
+      </div>
+      <div class="slide-number"><strong>01</strong><span>/04</span></div>
+      <button class="circle-arrow hero-next" aria-label="Next hero slide">›</button>
+      <div class="pagination hero-pagination" aria-label="Hero slider position"><i class="active"></i><i></i><i></i></div>
     </section>
 
-    <section id="featured" class="section featured">
-      <div class="section-heading reveal"><div><p class="eyebrow">001 / Latest signal</p><h2>Featured release</h2></div><p>A nocturnal pulse suspended between shadow and light.</p></div>
-      <article class="feature-card reveal">
-        <div class="cover cover-darkai"><span>NEW RELEASE</span><strong>DARKAI</strong><small>MIOKASTA</small><i></i></div>
-        <div class="feature-copy"><p class="eyebrow">Out now</p><h3>DARKAI</h3><p>Dark-room tension meets a luminous melodic current. A track for the exact moment the night changes shape.</p><div class="release-meta"><span>2026</span><span>Electronic</span><span>Toronto</span></div><div class="button-row"><a class="button button-dark" href="#" data-platform="Spotify">Spotify <span>↗</span></a><a class="button button-light" href="#" data-platform="Beatport">Beatport <span>↗</span></a></div></div>
-      </article>
+    <section id="latest" class="panel latest-panel reveal">
+      <div class="cover-art official-cover"><img src="assets/covers/darkai-alive-hq.png" alt="DARKAI / ALIVE cover"></div>
+      <div class="latest-copy"><p class="kicker">Latest release</p><div class="release-heading"><h2>DARKAI</h2><h3>ALIVE</h3></div><p>A deep and driving journey through melodic house and techno. Darkai is about energy, emotion and the night.</p><a class="button button-black" href="https://hypeddit.com/miokasta/darkai" target="_blank" rel="noopener">Listen</a></div>
+      <div class="action-stack"><a href="https://open.spotify.com/track/3QKPg92X2DE7iwbBIHDQ4a" target="_blank" rel="noopener"><b><img src="assets/icons/spotify.svg" alt=""></b><span>Listen on Spotify</span></a><a href="https://www.beatport.com/artist/miokasta/874134" target="_blank" rel="noopener"><b><img src="assets/icons/beatport.svg" alt=""></b><span>Buy on Beatport</span></a><a href="https://soundcloud.com/progressivevibesmusic/miokasta-darkai-progressive" target="_blank" rel="noopener"><b><img src="assets/icons/soundcloud.svg" alt=""></b><span>Listen on SoundCloud</span></a><a href="https://www.youtube.com/@miokasta" target="_blank" rel="noopener"><b><img src="assets/icons/youtube.svg" alt=""></b><span>Watch on YouTube</span></a></div>
     </section>
 
-    <section id="music" class="section music">
-      <div class="section-heading reveal"><div><p class="eyebrow">002 / Selected frequencies</p><h2>Music</h2></div><div class="carousel-controls"><button class="round-button prev" aria-label="Previous releases">←</button><button class="round-button next" aria-label="Next releases">→</button></div></div>
-      <div class="release-track" tabindex="0" aria-label="Release carousel">
-        <article class="release-card reveal"><div class="mini-cover alive"><b>ALIVE</b><small>MIOKASTA</small></div><div class="release-info"><span>01</span><div><h3>ALIVE</h3><p>Melodic electronic · 2026</p></div></div><div class="mini-links"><a href="#" data-platform="Spotify">Spotify ↗</a><a href="#" data-platform="Beatport">Beatport ↗</a></div></article>
-        <article class="release-card reveal"><div class="mini-cover electricity"><b>ELECTRICITY</b><small>MIOKASTA</small></div><div class="release-info"><span>02</span><div><h3>ELECTRICITY</h3><p>Progressive house · 2025</p></div></div><div class="mini-links"><a href="#" data-platform="Spotify">Spotify ↗</a><a href="#" data-platform="Beatport">Beatport ↗</a></div></article>
-        <article class="release-card reveal"><div class="mini-cover hey"><b>HEY<br>MR DJ</b><small>MIOKASTA</small></div><div class="release-info"><span>03</span><div><h3>HEY MR DJ</h3><p>Indie dance · 2025</p></div></div><div class="mini-links"><a href="#" data-platform="Spotify">Spotify ↗</a><a href="#" data-platform="Beatport">Beatport ↗</a></div></article>
-        <article class="release-card reveal"><div class="mini-cover rhythm"><b>ONLY<br>RHYTHM</b><small>MIOKASTA</small></div><div class="release-info"><span>04</span><div><h3>ONLY RHYTHM</h3><p>Tech house · 2025</p></div></div><div class="mini-links"><a href="#" data-platform="Spotify">Spotify ↗</a><a href="#" data-platform="Beatport">Beatport ↗</a></div></article>
+    <section id="music" class="panel music-panel reveal">
+      <div class="panel-title"><h2>Music</h2><a href="https://open.spotify.com/playlist/2WoUTrXsQRmbtxtNBinx18" target="_blank" rel="noopener">Open playlist</a></div>
+      <a class="playlist-feature" href="https://open.spotify.com/playlist/2WoUTrXsQRmbtxtNBinx18" target="_blank" rel="noopener" aria-label="Open Miokasta Originals playlist on Spotify">
+        <img src="assets/playlist/miokasta-originals-playlist-cover.png" alt="MIOKASTA Originals playlist cover">
+        <span><small>Official Spotify playlist · 17 tracks</small><strong><span class="brand-name">MIOKASTA</span> ORIGINALS</strong><em>Listen to the complete discography in its current playlist order</em></span>
+      </a>
+      <div class="carousel-wrap">
+        <button class="circle-arrow music-prev" aria-label="Previous releases">‹</button>
+        <div class="music-track" tabindex="0" aria-label="Music releases carousel">
+          <article class="release-card" data-spotify-id="69IhM3VThppFUbCuTEX3AP" data-hypeddit-url="https://hypeddit.com/miokasta/darkai"><button class="release-cover sourced-cover track-play" type="button" aria-label="Play DARKAI"><img src="assets/covers/discography/01-darkai-extended.jpg" alt="DARKAI official Spotify cover"><span class="play-badge">▶</span></button><h3>DARKAI</h3><p>MIOKASTA</p></article>
+          <article class="release-card" data-spotify-id="3uifOCS9OOHganlkayTLxY" data-hypeddit-url="https://hypeddit.com/miokasta/alive"><button class="release-cover sourced-cover track-play" type="button" aria-label="Play Alive"><img src="assets/covers/discography/02-alive-extended.jpg" alt="Alive official Spotify cover"><span class="play-badge">▶</span></button><h3>Alive</h3><p>MIOKASTA</p></article>
+          <article class="release-card" data-spotify-id="3fYCfOkqwqF7ZDkrO32bkt" data-hypeddit-url="https://hypeddit.com/miokasta/electricityoriginalmix"><button class="release-cover sourced-cover track-play" type="button" aria-label="Play Electricity"><img src="assets/covers/discography/03-electricity.jpg" alt="Electricity official Spotify cover"><span class="play-badge">▶</span></button><h3>Electricity</h3><p>MIOKASTA</p></article>
+          <article class="release-card" data-spotify-id="7utA0NfYFtkgoo1ySHLdmS"><button class="release-cover sourced-cover track-play" type="button" aria-label="Play HEY MR DJ"><img src="assets/covers/discography/04-hey-mr-dj.jpg" alt="HEY MR DJ official Spotify cover"><span class="play-badge">▶</span></button><h3>HEY MR DJ</h3><p>MIOKASTA</p></article>
+          <article class="release-card" data-spotify-id="2nyNuF30niZqJYaNwNhlpk"><button class="release-cover sourced-cover track-play" type="button" aria-label="Play I Killed My Best Friend"><img src="assets/covers/discography/05-i-killed-my-best-friend.jpg" alt="I Killed My Best Friend official Spotify cover"><span class="play-badge">▶</span></button><h3>I Killed My Best Friend</h3><p>MIOKASTA</p></article>
+          <article class="release-card" data-spotify-id="06EBY7nk50t9yn7jxk5lhq"><button class="release-cover sourced-cover track-play" type="button" aria-label="Play That First Feeling"><img src="assets/covers/discography/06-that-first-feeling.jpg" alt="That First Feeling official Spotify cover"><span class="play-badge">▶</span></button><h3>That First Feeling</h3><p>MIOKASTA</p></article>
+          <article class="release-card" data-spotify-id="5G76ZENZs3YfSzfEBzVbu1"><button class="release-cover sourced-cover track-play" type="button" aria-label="Play Spot Pt 2"><img src="assets/covers/discography/07-spot-pt-2.jpg" alt="Spot Pt 2 official Spotify cover"><span class="play-badge">▶</span></button><h3>Spot Pt 2</h3><p>MIOKASTA</p></article>
+          <article class="release-card" data-spotify-id="1K20E88lT90Lueoq6Fla93"><button class="release-cover sourced-cover track-play" type="button" aria-label="Play Inosuke"><img src="assets/covers/discography/08-inosuke.jpg" alt="Inosuke official Spotify cover"><span class="play-badge">▶</span></button><h3>Inosuke</h3><p>MIOKASTA</p></article>
+          <article class="release-card" data-spotify-id="4P1IjVSEAJzMj40E51ftAZ"><button class="release-cover sourced-cover track-play" type="button" aria-label="Play Vacuum"><img src="assets/covers/discography/09-vacuum.jpg" alt="Vacuum official Spotify cover"><span class="play-badge">▶</span></button><h3>Vacuum</h3><p>MIOKASTA</p></article>
+          <article class="release-card" data-spotify-id="1UzAgnzHZZNmHBfITRSyIM"><button class="release-cover sourced-cover track-play" type="button" aria-label="Play Ses Yeux"><img src="assets/covers/discography/10-ses-yeux.jpg" alt="Ses Yeux official Spotify cover"><span class="play-badge">▶</span></button><h3>Ses Yeux</h3><p>MIOKASTA</p></article>
+          <article class="release-card" data-spotify-id="1Xpphjm8RBJfqyplc6YNDx"><button class="release-cover sourced-cover track-play" type="button" aria-label="Play Pandemia"><img src="assets/covers/discography/11-pandemia.jpg" alt="Pandemia official Spotify cover"><span class="play-badge">▶</span></button><h3>Pandemia</h3><p>MIOKASTA</p></article>
+          <article class="release-card" data-spotify-id="5LG7YnnMfPyO2C0mDV8tIu"><button class="release-cover sourced-cover track-play" type="button" aria-label="Play Chain of Fools"><img src="assets/covers/discography/12-chain-of-fools.jpg" alt="Chain of Fools official Spotify cover"><span class="play-badge">▶</span></button><h3>Chain of Fools</h3><p>MIOKASTA</p></article>
+          <article class="release-card" data-spotify-id="45AS4TZEp4BAvyWv2b181C"><button class="release-cover sourced-cover track-play" type="button" aria-label="Play VOID"><img src="assets/covers/discography/13-void.jpg" alt="VOID official Spotify cover"><span class="play-badge">▶</span></button><h3>VOID</h3><p>MIOKASTA</p></article>
+          <article class="release-card" data-spotify-id="4uEMfpqiKLCOGUmkOaOmIt"><button class="release-cover sourced-cover track-play" type="button" aria-label="Play Only Now"><img src="assets/covers/discography/14-only-now.jpg" alt="Only Now official Spotify cover"><span class="play-badge">▶</span></button><h3>Only Now</h3><p>MIOKASTA</p></article>
+          <article class="release-card" data-spotify-id="0HXAwdpuTIsw5AWK8aP35G"><button class="release-cover sourced-cover track-play" type="button" aria-label="Play GEN Y"><img src="assets/covers/discography/15-gen-y.jpg" alt="GEN Y official Spotify cover"><span class="play-badge">▶</span></button><h3>GEN Y</h3><p>MIOKASTA</p></article>
+          <article class="release-card" data-spotify-id="2EPdCXF66XRkxbvPbU0NnU"><button class="release-cover sourced-cover track-play" type="button" aria-label="Play Spot Pt 1"><img src="assets/covers/discography/16-spot-pt-1.jpg" alt="Spot Pt 1 official Spotify cover"><span class="play-badge">▶</span></button><h3>Spot Pt 1</h3><p>MIOKASTA</p></article>
+          <article class="release-card" data-spotify-id="5ZLJhZKbllBJJY7NYWAxAH"><button class="release-cover sourced-cover track-play" type="button" aria-label="Play EVERYONE"><img src="assets/covers/discography/17-everyone.jpg" alt="EVERYONE official Spotify cover"><span class="play-badge">▶</span></button><h3>EVERYONE</h3><p>MIOKASTA</p></article>
+        </div>
+        <button class="circle-arrow music-next" aria-label="Next releases">›</button>
+      </div>
+      <div class="music-carousel-guide" aria-live="polite"><span id="music-carousel-count">01 / 17</span><span>Swipe · use arrows</span></div>
+      <div class="pagination music-pagination"><i class="active"></i><i></i><i></i></div>
+      <div class="music-selected-player" aria-live="polite">
+        <iframe id="spotify-player" title="Selected Spotify track player" src="https://open.spotify.com/embed/track/69IhM3VThppFUbCuTEX3AP?utm_source=generator&amp;theme=0" loading="lazy" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
       </div>
     </section>
 
-    <section id="about" class="section about">
-      <div class="about-art reveal"><div class="portrait-mark"><span>M</span></div><p>MIOKASTA / TORONTO</p></div>
-      <div class="about-copy reveal"><p class="eyebrow">003 / Behind the sound</p><h2>Movement is<br>the message.</h2><p class="lead">MIOKASTA builds worlds where rhythm, atmosphere and raw feeling become one.</p><p>Based in Toronto, the electronic artist, DJ and producer moves freely between hypnotic club energy and cinematic melody. Every release is designed as a space to disappear into — and return from transformed.</p><a class="text-link" href="#connect">Follow the journey <span>↗</span></a></div>
+    <section id="remixes" class="panel soundcloud-panel reveal">
+      <div class="panel-title"><h2><span class="brand-name">MIOKASTA</span> HQ REMIXES</h2><a href="https://on.soundcloud.com/MCDilZQ7ggzHsDErYu" target="_blank" rel="noopener">Open SoundCloud</a></div>
+      <p class="soundcloud-intro">Official MIOKASTA remix collection.</p>
+      <a class="soundcloud-playlist-feature" href="https://on.soundcloud.com/MCDilZQ7ggzHsDErYu" target="_blank" rel="noopener"><img src="assets/playlist/miokasta-hq-soundcloud-cover.png" alt="MIOKASTA HQ REMIXES playlist cover"><span><small>Official SoundCloud playlist</small><strong>MIOKΛSTΛ HQ REMIXES</strong><em>Open the complete collection</em></span></a>
+      <div class="soundcloud-carousel" aria-label="MIOKASTA HQ REMIXES tracks carousel">
+        <button class="circle-arrow soundcloud-prev" type="button" aria-label="Previous SoundCloud track">‹</button>
+        <div class="soundcloud-track" tabindex="0">
+          <article class="soundcloud-track-card active"><span>01 · 8,931 plays</span><h3>Horisone × Ryan Nevis — Feel So High (Miokasta Remix)</h3><iframe title="Feel So High SoundCloud player" scrolling="no" frameborder="no" allow="autoplay" loading="lazy" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/miokasta/horisone-x-ryan-nevis-feel-so-high-miokasta-remix&amp;color=%239b87ff&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=false"></iframe></article>
+          <article class="soundcloud-track-card"><span>02 · 8,379 plays</span><h3>Nico Sparvieri — Patagonica (Miokasta Remix)</h3><iframe title="Patagonica SoundCloud player" scrolling="no" frameborder="no" allow="autoplay" loading="lazy" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/miokasta/nico-sparvieri-patagonica-miokasta-remix&amp;color=%239b87ff&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=false"></iframe></article>
+          <article class="soundcloud-track-card"><span>03 · 3,968 plays</span><h3>XANDL × MODBIT — Delirio (Miokasta Remix)</h3><iframe title="Delirio SoundCloud player" scrolling="no" frameborder="no" allow="autoplay" loading="lazy" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/miokasta/xandl-modbit-delirio-miokasta-remix&amp;color=%239b87ff&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=false"></iframe></article>
+          <article class="soundcloud-track-card"><span>04 · 3,537 plays</span><h3>Eli &amp; Fur — You're So High (Miokasta Remix)</h3><iframe title="You're So High SoundCloud player" scrolling="no" frameborder="no" allow="autoplay" loading="lazy" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/miokasta/eli-fur-youre-so-high-miokasta-remix&amp;color=%239b87ff&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=false"></iframe></article>
+          <article class="soundcloud-track-card"><span>05 · Remastered · 3,312 plays</span><h3>No Eyes (Miokasta Remix)</h3><iframe title="No Eyes Remastered SoundCloud player" scrolling="no" frameborder="no" allow="autoplay" loading="lazy" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/miokasta/mr17&amp;color=%239b87ff&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=false"></iframe></article>
+          <article class="soundcloud-track-card"><span>06 · Remastered · 2,773 plays</span><h3>John Summit — Lights Go Out (Miokasta Remix)</h3><iframe title="Lights Go Out SoundCloud player" scrolling="no" frameborder="no" allow="autoplay" loading="lazy" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/miokasta/john-summit-lights-go-out-1&amp;color=%239b87ff&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=false"></iframe></article>
+          <article class="soundcloud-track-card"><span>07 · 2,604 plays</span><h3>Nu Aspect × Boris Brejcha — Afterlife (Miokasta Remix)</h3><iframe title="Afterlife SoundCloud player" scrolling="no" frameborder="no" allow="autoplay" loading="lazy" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/miokasta/nu-aspect-ft-boris-brejcha-afterlife-miokasta-remix&amp;color=%239b87ff&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=false"></iframe></article>
+          <article class="soundcloud-track-card"><span>08 · 2,503 plays</span><h3>Oppidan × Sammy Virji — Send It (Miokasta Remix)</h3><iframe title="Send It SoundCloud player" scrolling="no" frameborder="no" allow="autoplay" loading="lazy" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/miokasta/oppidan-feat-sammy-virji-send-it-miokasta-remix&amp;color=%239b87ff&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=false"></iframe></article>
+          <article class="soundcloud-track-card"><span>09 · Remastered · 2,218 plays</span><h3>Headache (Miokasta Remix)</h3><iframe title="Headache Remastered SoundCloud player" scrolling="no" frameborder="no" allow="autoplay" loading="lazy" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/miokasta/headache-miokasta-remix&amp;color=%239b87ff&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=false"></iframe></article>
+          <article class="soundcloud-track-card"><span>10 · Remastered · 2,183 plays</span><h3>Tina Says — Bang Bang (Miokasta Remix)</h3><iframe title="Bang Bang SoundCloud player" scrolling="no" frameborder="no" allow="autoplay" loading="lazy" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/miokasta/bang-bang&amp;color=%239b87ff&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=false"></iframe></article>
+          <article class="soundcloud-track-card"><span>11 · Remastered · 2,179 plays</span><h3>The Green Light (Miokasta Remix)</h3><iframe title="The Green Light Remastered SoundCloud player" scrolling="no" frameborder="no" allow="autoplay" loading="lazy" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/miokasta/the-green-light-miokasta-remix&amp;color=%239b87ff&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=false"></iframe></article>
+          <article class="soundcloud-track-card"><span>12 · 2,070 plays</span><h3>Franky Wah × Jonas Aden — Call My Name (Miokasta Remix)</h3><iframe title="Call My Name SoundCloud player" scrolling="no" frameborder="no" allow="autoplay" loading="lazy" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/miokasta/franky-wah-x-jonas-aden-call-my-name-miokasta-remix&amp;color=%239b87ff&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=false"></iframe></article>
+          <article class="soundcloud-track-card"><span>13 · 1,998 plays</span><h3>Diplo × Boris Brejcha — Happinezz × On My Mind (Miokasta Remix)</h3><iframe title="Happinezz x On My Mind SoundCloud player" scrolling="no" frameborder="no" allow="autoplay" loading="lazy" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/miokasta/diplo-x-boris-brejcha-happinezz-x-on-my-mind-miokasta-remix&amp;color=%239b87ff&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=false"></iframe></article>
+          <article class="soundcloud-track-card"><span>14 · 1,989 plays</span><h3>Eli &amp; Fur × Dosem — Parfume (Miokasta Remix)</h3><iframe title="Parfume SoundCloud player" scrolling="no" frameborder="no" allow="autoplay" loading="lazy" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/miokasta/eli-fur-x-dosem-parfume-miokasta-remix&amp;color=%239b87ff&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=false"></iframe></article>
+          <article class="soundcloud-track-card"><span>15 · Remastered · 1,952 plays</span><h3>Delirium (Miokasta Remix)</h3><iframe title="Delirium Remastered SoundCloud player" scrolling="no" frameborder="no" allow="autoplay" loading="lazy" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/miokasta/mr13&amp;color=%239b87ff&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=false"></iframe></article>
+          <article class="soundcloud-track-card"><span>16 · 1,906 plays</span><h3>Claptone — No Eyes (Miokasta Remix)</h3><iframe title="No Eyes SoundCloud player" scrolling="no" frameborder="no" allow="autoplay" loading="lazy" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/miokasta/claptone-no-eyes-miokasta-remix&amp;color=%239b87ff&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=false"></iframe></article>
+          <article class="soundcloud-track-card"><span>17 · 1,852 plays</span><h3>Above &amp; Beyond × Soully Space — Believer (Miokasta Remix)</h3><iframe title="Believer SoundCloud player" scrolling="no" frameborder="no" allow="autoplay" loading="lazy" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/miokasta/above-beyond-x-soully-space-believer-miokasta-remix&amp;color=%239b87ff&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=false"></iframe></article>
+          <article class="soundcloud-track-card"><span>18 · 1,725 plays</span><h3>Georgi Kay × Gil Glaze × Emi Galvan — The Green Light (Miokasta Remix)</h3><iframe title="The Green Light SoundCloud player" scrolling="no" frameborder="no" allow="autoplay" loading="lazy" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/miokasta/georgi-kay-gil-glaze-feat-emi-galvan-the-green-light-miokasta-remix&amp;color=%239b87ff&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=false"></iframe></article>
+          <article class="soundcloud-track-card"><span>19 · 1,717 plays</span><h3>Ben Böhmer — Wechselwerk (Miokasta Remix)</h3><iframe title="Wechselwerk SoundCloud player" scrolling="no" frameborder="no" allow="autoplay" loading="lazy" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/miokasta/ben-bohmer-wechselwerk-miokasta-remix-1&amp;color=%239b87ff&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=false"></iframe></article>
+          <article class="soundcloud-track-card"><span>20 · 1,705 plays</span><h3>Nora En Pure × Sono — Trailblazer (Miokasta Remix)</h3><iframe title="Trailblazer SoundCloud player" scrolling="no" frameborder="no" allow="autoplay" loading="lazy" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/miokasta/nora-en-pure-x-sono-trailblazer-miokasta-remix&amp;color=%239b87ff&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=false"></iframe></article>
+          <article class="soundcloud-track-card"><span>21 · 1,702 plays</span><h3>Yves Murasca — Heartless Beatings (Miokasta Remix)</h3><iframe title="Heartless Beatings SoundCloud player" scrolling="no" frameborder="no" allow="autoplay" loading="lazy" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/miokasta/yves-murasca-feat-lane-8-heartless-beatings-miokasta-remix&amp;color=%239b87ff&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=false"></iframe></article>
+          <article class="soundcloud-track-card"><span>22 · Remastered · 1,659 plays</span><h3>You're So High (Miokasta Remix)</h3><iframe title="You're So High Remastered SoundCloud player" scrolling="no" frameborder="no" allow="autoplay" loading="lazy" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/miokasta/mr1&amp;color=%239b87ff&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=false"></iframe></article>
+          <article class="soundcloud-track-card"><span>23 · Remastered · 1,646 plays</span><h3>Primal Source (Miokasta Remix)</h3><iframe title="Primal Source Remastered SoundCloud player" scrolling="no" frameborder="no" allow="autoplay" loading="lazy" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/miokasta/primal-source-miokasta-remix&amp;color=%239b87ff&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=false"></iframe></article>
+          <article class="soundcloud-track-card"><span>24 · 1,627 plays</span><h3>Joshwa × Discotron — Always Yours (Miokasta Remix)</h3><iframe title="Always Yours SoundCloud player" scrolling="no" frameborder="no" allow="autoplay" loading="lazy" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/miokasta/joshwa-x-discotron-always-yours-x-disco-ballin-miokasta-remix&amp;color=%239b87ff&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=false"></iframe></article>
+          <article class="soundcloud-track-card"><span>25 · Remastered · 1,570 plays</span><h3>Believer (Miokasta Remix)</h3><iframe title="Believer Remastered SoundCloud player" scrolling="no" frameborder="no" allow="autoplay" loading="lazy" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/miokasta/mrr01&amp;color=%239b87ff&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=false"></iframe></article>
+          <article class="soundcloud-track-card"><span>26 · 1,557 plays</span><h3>GENESI × TCHAMI — Everything You Have Done After Life (Miokasta Remix)</h3><iframe title="Everything You Have Done After Life SoundCloud player" scrolling="no" frameborder="no" allow="autoplay" loading="lazy" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/miokasta/genesi-x-tchami-everything-you-have-done-after-life-mikoasta-remix&amp;color=%239b87ff&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=false"></iframe></article>
+          <article class="soundcloud-track-card"><span>27 · 1,500 plays</span><h3>S Zer0 &amp; Valmonte — Forever (Miokasta Remix)</h3><iframe title="Forever SoundCloud player" scrolling="no" frameborder="no" allow="autoplay" loading="lazy" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/miokasta/s-zer0-valmonte-forever-miokasta-remix&amp;color=%239b87ff&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=false"></iframe></article>
+          <article class="soundcloud-track-card"><span>28 · 1,445 plays</span><h3>GusGus — Arabian Horse (Miokasta Remix)</h3><iframe title="Arabian Horse SoundCloud player" scrolling="no" frameborder="no" allow="autoplay" loading="lazy" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/miokasta/gusgus-arabian-horse-miokasta-remix&amp;color=%239b87ff&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=false"></iframe></article>
+          <article class="soundcloud-track-card"><span>29 · 1,397 plays</span><h3>Jewels, Yuma. &amp; SOMMA feat. Faith — Falling With You (Miokasta Remix)</h3><iframe title="Falling With You SoundCloud player" scrolling="no" frameborder="no" allow="autoplay" loading="lazy" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/miokasta/jewels-yuma-somma-feat-faith-falling-with-you-miokasta-remix&amp;color=%239b87ff&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=false"></iframe></article>
+          <article class="soundcloud-track-card"><span>30 · Remastered · 1,150 plays</span><h3>Wechselwerk (Miokasta Remix)</h3><iframe title="Wechselwerk Remastered SoundCloud player" scrolling="no" frameborder="no" allow="autoplay" loading="lazy" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/miokasta/wechselwerk-miokasta-remix&amp;color=%239b87ff&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=false"></iframe></article>
+        </div>
+        <button class="circle-arrow soundcloud-next" type="button" aria-label="Next SoundCloud track">›</button>
+      </div>
+      <div class="pagination soundcloud-pagination" aria-label="SoundCloud carousel position"><i class="active"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
     </section>
 
-    <section id="live" class="section live">
-      <div class="section-heading reveal"><div><p class="eyebrow">004 / In the room</p><h2>Live / DJ</h2></div><p>Immersive, instinctive sets shaped for the energy in front of them.</p></div>
-      <div class="live-panel reveal"><div class="live-visual"><div class="equalizer" aria-hidden="true"></div><span>LIVE FREQUENCY</span></div><div class="live-copy"><h3>Bring MIOKASTA<br>to your room.</h3><p>Club nights, festivals and curated events. For bookings and collaborations, get in touch.</p><a class="button button-light" href="mailto:booking@miokasta.com">Booking enquiries <span>↗</span></a></div></div>
+    <section id="videos" class="panel video-gallery-panel reveal">
+      <div class="panel-title"><h2>Videos</h2><a href="https://www.youtube.com/@miokasta" target="_blank" rel="noopener">View channel</a></div>
+      <div class="video-gallery-wrap">
+        <button class="circle-arrow video-gallery-prev" type="button" aria-label="Previous video">‹</button>
+        <div class="video-gallery-track" tabindex="0" aria-label="MIOKASTA video carousel">
+          <article class="video-gallery-card active">
+            <div class="youtube-video-frame local-video-frame" aria-label="MIOKASTA club set highlight"><video class="site-video" src="assets/videos/session-01-hd.mp4" muted autoplay loop playsinline preload="metadata"></video></div>
+            <div class="video-gallery-caption"><strong>Miokasta's Mind-Blowing TechHouse Set · Euphoria Glow Night 2024</strong><span>60,193 views</span></div>
+          </article>
+          <article class="video-gallery-card">
+            <div class="youtube-video-frame local-video-frame" aria-label="MIOKASTA rooftop set highlight"><video class="site-video" src="assets/videos/session-02-hd.mp4" muted autoplay loop playsinline preload="metadata"></video></div>
+            <div class="video-gallery-caption"><strong>AnjunaVibe · Melodic Tech &amp; House · Toronto AirShow</strong><span>14,526 views</span></div>
+          </article>
+          <article class="video-gallery-card">
+            <div class="youtube-video-frame local-video-frame" aria-label="MIOKASTA club set highlight"><video class="site-video" src="assets/videos/session-03-hd.mp4" muted autoplay loop playsinline preload="metadata"></video></div>
+            <div class="video-gallery-caption"><strong>TIFF Cinema · Progressive House · Melodic Techno</strong><span>5,949 views</span></div>
+          </article>
+        </div>
+        <button class="circle-arrow video-gallery-next" type="button" aria-label="Next video">›</button>
+      </div>
+      <div class="pagination video-gallery-pagination" aria-label="Video carousel position"><i class="active"></i><i></i><i></i></div>
     </section>
 
-    <section id="connect" class="section connect">
-      <div class="newsletter reveal"><p class="eyebrow">005 / Stay in orbit</p><h2>New music.<br>No noise.</h2><p>Join the list for new releases, live dates and fragments from the studio.</p><form id="newsletter-form"><label class="sr-only" for="email">Email address</label><input id="email" type="email" placeholder="Your email address" required><button type="submit" aria-label="Subscribe">→</button></form><p id="form-message" class="form-message" aria-live="polite"></p></div>
-      <div class="socials reveal"><p class="eyebrow">Find MIOKASTA</p><div class="social-list"><a href="#">Instagram <span>↗</span></a><a href="#">Spotify <span>↗</span></a><a href="#">SoundCloud <span>↗</span></a><a href="#">Beatport <span>↗</span></a><a href="#">YouTube <span>↗</span></a></div></div>
+    <section id="about" class="panel about-panel reveal">
+      <div class="about-copy"><h2>About</h2><p><span class="brand-name brand-inline">MIOKASTA</span> is a Toronto-based DJ and electronic music producer blending melodic house, progressive house, tech house and melodic techno. His sound combines hypnotic grooves, emotional melodies and driving dancefloor energy. He is the founder of Euphoria Sonics and Rapture Tech House—independent projects connecting original music, events and broadcast DJ sets. His releases have appeared on Progressive Vibes Music, dublucid, GAME OF TONES and Flowing Movement Music.</p><a class="button button-ghost" href="#booking">Booking &amp; contact</a></div>
+      <div id="live" class="about-gallery" aria-label="MIOKASTA Instagram photo carousel">
+        <div class="about-photo-track">
+          <a class="about-photo active" href="https://www.instagram.com/p/DZvmdoPj4OV/" target="_blank" rel="noopener"><img src="assets/instagram/instagram-02.jpg" alt="MIOKASTA leading a live set while the second DJ stands side-on"></a>
+          <a class="about-photo" href="https://www.instagram.com/p/DS2sBzdj1gh/" target="_blank" rel="noopener"><img src="assets/instagram/instagram-06.jpg" alt="MIOKASTA performing beneath warm lanterns at a different venue"></a>
+          <a class="about-photo" href="https://www.instagram.com/p/DZvmdoPj4OV/" target="_blank" rel="noopener"><img src="assets/instagram/instagram-05.jpg" alt="MIOKASTA performing a back-to-back set in the red-light club"></a>
+          <a class="about-photo" href="https://www.instagram.com/p/DS2sBzdj1gh/" target="_blank" rel="noopener"><img src="assets/instagram/instagram-08.jpg" alt="MIOKASTA performing at Toronto House Community"></a>
+        </div>
+        <button class="circle-arrow about-prev" type="button" aria-label="Previous Instagram photo">‹</button>
+        <button class="circle-arrow about-next" type="button" aria-label="Next Instagram photo">›</button>
+        <div class="about-counter"><span>01</span> / 04 · INSTAGRAM</div>
+      </div>
+    </section>
+
+    <section class="panel newsletter-panel reveal">
+      <div><h2>Join community</h2><p>Get exclusive updates on new music, shows and more.</p></div>
+      <form id="newsletter-form"><label class="sr-only" for="email">Email address</label><input id="email" type="email" placeholder="Your email address" required><button type="submit">Subscribe</button></form>
+      <p id="form-message" class="form-message" aria-live="polite"></p>
     </section>
   </main>
 
-  <footer><a class="wordmark" href="#top">MIOKASTA</a><p>Electronic artist · Toronto</p><p>© <span id="year"></span> MIOKASTA</p></footer>
+  <footer id="booking" class="panel site-footer reveal">
+    <div class="footer-brand"><p>MELODIC PROGRESSIVE DEEP<br>HOUSE &amp; TECNHO</p><small>© <span id="year"></span> <span class="footer-copyright-name">Miokasta</span>. All rights reserved.</small><div class="footer-socials service-icons"><a href="https://open.spotify.com/artist/4Axv4C59OL7xrATnB699ff" target="_blank" rel="noopener"><img src="assets/icons/spotify.svg" alt="Spotify"></a><a href="https://www.instagram.com/miokasta_ofc" target="_blank" rel="noopener"><img src="assets/icons/instagram.svg" alt="Instagram"></a><a href="https://www.youtube.com/@miokasta" target="_blank" rel="noopener"><img src="assets/icons/youtube.svg" alt="YouTube"></a><a href="https://soundcloud.com/miokasta" target="_blank" rel="noopener"><img src="assets/icons/soundcloud.svg" alt="SoundCloud"></a></div></div>
+    <div><h3>Booking &amp; contact</h3><p>For bookings,<br>collaborations and<br>inquiries:</p><small class="email-label">Booking</small><a class="email-link" href="mailto:booking@miokasta.com">booking@miokasta.com</a><small class="email-label">Music</small><a class="email-link" href="mailto:music@miokasta.com">music@miokasta.com</a><a class="button button-ghost" href="mailto:booking@miokasta.com">Contact via email</a></div>
+    <div><h3>Links</h3><a href="#music">Music</a><a href="#about">About</a><a href="#live">Live</a><a href="#videos">Videos</a><a href="#booking">Booking</a></div>
+    <div><h3>Legal</h3><a href="#" data-platform="Privacy policy">Privacy policy</a><a href="#" data-platform="Terms of use">Terms of use</a><a href="#" data-platform="Cookies">Cookies</a></div>
+  </footer>
   <div class="toast" role="status" aria-live="polite"></div>
-  <script src="script.js"></script>
+  <script src="script.js?v=20260810-6"></script>
 </body>
 </html>
