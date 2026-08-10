@@ -370,18 +370,93 @@ const soundcloudTrack = document.querySelector('.soundcloud-track');
 if (soundcloudTrack) {
   const soundcloudCards = [...soundcloudTrack.querySelectorAll('.soundcloud-track-card')];
   const soundcloudDots = [...document.querySelectorAll('.soundcloud-pagination i')];
+  const soundcloudWidgets = [];
   let soundcloudScrollFrame;
-  soundcloudCards.forEach((card) => {
+  const formatSoundcloudTime = (milliseconds = 0) => {
+    const totalSeconds = Math.max(0, Math.floor(milliseconds / 1000));
+    return `${Math.floor(totalSeconds / 60)}:${String(totalSeconds % 60).padStart(2, '0')}`;
+  };
+
+  soundcloudCards.forEach((card, cardIndex) => {
     const player = card.querySelector('iframe');
     const source = player?.getAttribute('src');
     if (source) {
       const compactSource = source
         .replace(/([?&])visual=(?:true|false)/, '$1visual=false')
-        .replace(/([?&])show_artwork=(?:true|false)/, '$1show_artwork=true');
+        .replace(/([?&])show_artwork=(?:true|false)/, '$1show_artwork=false');
       const withVisualMode = compactSource.includes('visual=') ? compactSource : `${compactSource}&visual=false`;
-      const withArtwork = withVisualMode.includes('show_artwork=') ? withVisualMode : `${withVisualMode}&show_artwork=true`;
+      const withArtwork = withVisualMode.includes('show_artwork=') ? withVisualMode : `${withVisualMode}&show_artwork=false`;
       if (withArtwork !== source) player.setAttribute('src', withArtwork);
     }
+
+    if (!player) return;
+    player.classList.add('soundcloud-widget-frame');
+    player.id = `soundcloud-widget-${cardIndex + 1}`;
+
+    const sourceUrl = new URL(player.getAttribute('src'), window.location.href);
+    const trackUrl = sourceUrl.searchParams.get('url') || 'https://soundcloud.com/miokasta';
+    const customPlayer = document.createElement('div');
+    customPlayer.className = 'soundcloud-custom-player';
+    customPlayer.innerHTML = `
+      <button class="soundcloud-play" type="button" aria-label="Play ${card.querySelector('h3')?.textContent || 'SoundCloud track'}"><span></span></button>
+      <div class="soundcloud-player-body">
+        <div class="soundcloud-player-top"><strong>SOUNDCLOUD</strong><span class="soundcloud-time"><b>0:00</b> / <i>0:00</i></span></div>
+        <button class="soundcloud-progress" type="button" aria-label="Seek through track"><span></span></button>
+      </div>
+      <a class="soundcloud-open" href="${trackUrl}" target="_blank" rel="noopener" aria-label="Open track on SoundCloud">SC</a>`;
+    card.appendChild(customPlayer);
+
+    const playButton = customPlayer.querySelector('.soundcloud-play');
+    const progress = customPlayer.querySelector('.soundcloud-progress');
+    const progressFill = progress.querySelector('span');
+    const currentTime = customPlayer.querySelector('.soundcloud-time b');
+    const durationTime = customPlayer.querySelector('.soundcloud-time i');
+    const initializeSoundcloudWidget = (attempt = 0) => {
+      const widget = window.SC?.Widget ? window.SC.Widget(player) : null;
+      if (!widget) {
+        if (attempt < 50) {
+          window.setTimeout(() => initializeSoundcloudWidget(attempt + 1), 200);
+          return;
+        }
+        playButton.addEventListener('click', () => window.open(trackUrl, '_blank', 'noopener'));
+        return;
+      }
+
+      document.documentElement.classList.add('soundcloud-api-ready');
+      soundcloudWidgets.push(widget);
+      widget.bind(window.SC.Widget.Events.READY, () => {
+        widget.getDuration((duration) => { durationTime.textContent = formatSoundcloudTime(duration); });
+      });
+      widget.bind(window.SC.Widget.Events.PLAY, () => {
+        customPlayer.classList.add('is-playing');
+        playButton.setAttribute('aria-label', 'Pause SoundCloud track');
+      });
+      widget.bind(window.SC.Widget.Events.PAUSE, () => {
+        customPlayer.classList.remove('is-playing');
+        playButton.setAttribute('aria-label', 'Play SoundCloud track');
+      });
+      widget.bind(window.SC.Widget.Events.FINISH, () => {
+        customPlayer.classList.remove('is-playing');
+        progressFill.style.width = '0%';
+        currentTime.textContent = '0:00';
+      });
+      widget.bind(window.SC.Widget.Events.PLAY_PROGRESS, (event) => {
+        progressFill.style.width = `${Math.min(100, Math.max(0, event.relativePosition * 100))}%`;
+        currentTime.textContent = formatSoundcloudTime(event.currentPosition);
+      });
+      playButton.addEventListener('click', () => {
+        widget.isPaused((isPaused) => {
+          if (isPaused) widget.play();
+          else widget.pause();
+        });
+      });
+      progress.addEventListener('click', (event) => {
+        const bounds = progress.getBoundingClientRect();
+        const ratio = Math.min(1, Math.max(0, (event.clientX - bounds.left) / bounds.width));
+        widget.getDuration((duration) => widget.seekTo(duration * ratio));
+      });
+    };
+    initializeSoundcloudWidget();
   });
   let soundcloudIndex = 0;
 

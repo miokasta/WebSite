@@ -670,7 +670,23 @@ body:before,body:after{opacity:.18;filter:blur(52px)}
 .soundcloud-track-card:hover{transform:translateY(-3px)}
 .soundcloud-track-card>span{display:block;color:#a996ff;font-size:8px;letter-spacing:.18em;text-transform:uppercase}
 .soundcloud-track-card h3{min-height:44px;margin:10px 0 12px;color:#f8f6ff;font:300 17px/1.3 "Jost",sans-serif;letter-spacing:.05em;text-transform:uppercase}
-.soundcloud-track-card iframe{display:block;width:100%;height:120px;border:0;border-radius:12px;background:#05060d;color-scheme:dark;box-shadow:inset 0 0 0 1px rgba(204,197,255,.08)}
+.soundcloud-track-card{position:relative}
+.soundcloud-track-card iframe.soundcloud-widget-frame{position:absolute;width:1px!important;height:1px!important;left:0;bottom:0;opacity:0;pointer-events:none;border:0}
+.soundcloud-custom-player{height:92px;display:grid;grid-template-columns:56px minmax(0,1fr) 34px;align-items:center;gap:16px;padding:16px 18px;background:linear-gradient(135deg,#111218,#06070c);border:1px solid rgba(255,255,255,.09);border-radius:12px;box-shadow:inset 0 1px rgba(255,255,255,.035),0 12px 28px rgba(0,0,0,.25)}
+.soundcloud-play{width:50px;height:50px;padding:0;border:1px solid rgba(255,255,255,.32);border-radius:50%;background:#090a10;display:grid;place-items:center;cursor:pointer;transition:border-color .25s,background .25s,transform .25s}
+.soundcloud-play:hover{border-color:#fff;transform:scale(1.03)}
+.soundcloud-play span{width:0;height:0;margin-left:4px;border-top:8px solid transparent;border-bottom:8px solid transparent;border-left:12px solid #fff}
+.soundcloud-custom-player.is-playing .soundcloud-play span{width:12px;height:15px;margin-left:0;border:0;border-left:4px solid #fff;border-right:4px solid #fff}
+.soundcloud-player-body{min-width:0}
+.soundcloud-player-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:15px;color:#fff}
+.soundcloud-player-top strong{font:500 9px "Jost",sans-serif;letter-spacing:.18em}
+.soundcloud-time{white-space:nowrap;color:rgba(255,255,255,.56);font:300 9px "Jost",sans-serif;letter-spacing:.06em}
+.soundcloud-time b,.soundcloud-time i{font:inherit;color:inherit}
+.soundcloud-progress{position:relative;display:block;width:100%;height:18px;padding:8px 0;border:0;background:transparent;cursor:pointer}
+.soundcloud-progress:before{content:"";position:absolute;left:0;right:0;top:8px;height:2px;background:rgba(255,255,255,.22)}
+.soundcloud-progress span{position:absolute;left:0;top:8px;width:0;height:2px;background:#fff;box-shadow:0 0 8px rgba(255,255,255,.45);transition:width .12s linear}
+.soundcloud-open{width:32px;height:32px;border:1px solid rgba(255,255,255,.15);border-radius:50%;display:grid;place-items:center;color:#fff;text-decoration:none;font:500 8px "Jost",sans-serif;letter-spacing:.06em;transition:border-color .25s,background .25s}
+.soundcloud-open:hover{border-color:#fff;background:rgba(255,255,255,.08)}
 .soundcloud-prev,.soundcloud-next{position:absolute;top:50%;transform:translateY(-50%)}
 .soundcloud-prev{left:0}.soundcloud-next{right:0}
 .soundcloud-prev:hover,.soundcloud-next:hover{transform:translateY(-50%) scale(1.05)}
@@ -689,6 +705,9 @@ body:before,body:after{opacity:.18;filter:blur(52px)}
   .soundcloud-track{height:auto!important;gap:10px!important}
   .soundcloud-track-card{flex-basis:88vw;padding:13px}
   .soundcloud-track-card h3{font-size:15px}
+  .soundcloud-custom-player{height:82px;grid-template-columns:46px minmax(0,1fr) 30px;gap:12px;padding:12px}
+  .soundcloud-play{width:44px;height:44px}
+  .soundcloud-open{width:29px;height:29px}
   .soundcloud-prev,.soundcloud-next{display:none}
 }
 
