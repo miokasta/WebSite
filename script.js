@@ -374,7 +374,14 @@ if (soundcloudTrack) {
   soundcloudCards.forEach((card) => {
     const player = card.querySelector('iframe');
     const source = player?.getAttribute('src');
-    if (source && !source.includes('visual=true')) player.setAttribute('src', `${source}&visual=true`);
+    if (source) {
+      const compactSource = source
+        .replace(/([?&])visual=(?:true|false)/, '$1visual=false')
+        .replace(/([?&])show_artwork=(?:true|false)/, '$1show_artwork=true');
+      const withVisualMode = compactSource.includes('visual=') ? compactSource : `${compactSource}&visual=false`;
+      const withArtwork = withVisualMode.includes('show_artwork=') ? withVisualMode : `${withVisualMode}&show_artwork=true`;
+      if (withArtwork !== source) player.setAttribute('src', withArtwork);
+    }
   });
   let soundcloudIndex = 0;
 

@@ -670,7 +670,7 @@ body:before,body:after{opacity:.18;filter:blur(52px)}
 .soundcloud-track-card:hover{transform:translateY(-3px)}
 .soundcloud-track-card>span{display:block;color:#a996ff;font-size:8px;letter-spacing:.18em;text-transform:uppercase}
 .soundcloud-track-card h3{min-height:44px;margin:10px 0 12px;color:#f8f6ff;font:300 17px/1.3 "Jost",sans-serif;letter-spacing:.05em;text-transform:uppercase}
-.soundcloud-track-card iframe{display:block;width:100%;height:166px;border:0;background:#05060d;color-scheme:dark;box-shadow:inset 0 0 0 1px rgba(204,197,255,.08)}
+.soundcloud-track-card iframe{display:block;width:100%;height:120px;border:0;border-radius:12px;background:#05060d;color-scheme:dark;box-shadow:inset 0 0 0 1px rgba(204,197,255,.08)}
 .soundcloud-prev,.soundcloud-next{position:absolute;top:50%;transform:translateY(-50%)}
 .soundcloud-prev{left:0}.soundcloud-next{right:0}
 .soundcloud-prev:hover,.soundcloud-next:hover{transform:translateY(-50%) scale(1.05)}
