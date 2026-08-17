@@ -81,6 +81,7 @@
   background:#03040a;
   cursor:pointer;
 }
+.video-youtube-link{display:block;color:inherit;text-decoration:none;cursor:pointer}
 
 .hero-portrait>img,.live-photo>img{width:100%;height:100%;display:block;object-fit:cover}
 .hero-portrait>img{width:118%;max-width:none;object-position:right center;filter:none;transform:translateX(-15%);transform-origin:center}
