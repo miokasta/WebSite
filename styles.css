@@ -1541,7 +1541,7 @@ body.album-mode .soundcloud-panel{justify-content:flex-start!important}
 .soundcloud-lane-track .soundcloud-track-card{flex:0 0 calc((100% - 12px)/2);scroll-snap-align:start;padding:12px}
 .soundcloud-lane-track .soundcloud-track-card h3{min-height:32px;margin:6px 0 8px;font-size:13px;line-height:1.2}
 .soundcloud-lane-track .soundcloud-track-card iframe{height:96px}
-.soundcloud-lane-prev,.soundcloud-lane-next{position:static!important;width:28px!important;height:28px!important;transform:none!important;font-size:18px}
+.soundcloud-lane-prev,.soundcloud-lane-next{position:relative!important;width:28px!important;height:28px!important;transform:none!important;font-size:18px}
 .soundcloud-lane-prev:hover,.soundcloud-lane-next:hover{transform:scale(1.05)!important}
 
 /* Keep the About action in normal flow above the gallery. */
@@ -2003,8 +2003,8 @@ body.album-mode .about-gallery-stack{width:min(100%,360px);margin-inline:auto}
   mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M8 4 L16 12 L8 20' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;
   transform-origin:50% 50%;
 }
-.hero-prev::before,.music-prev::before,.soundcloud-prev::before,.about-prev::before,.album-page-prev::before{transform:translate(-50%,-50%) rotate(180deg)}
-.hero-next::before,.music-next::before,.soundcloud-next::before,.about-next::before,.album-page-next::before{transform:translate(-50%,-50%)}
+.hero-prev::before,.music-prev::before,.soundcloud-prev::before,.soundcloud-lane-prev::before,.about-prev::before,.album-page-prev::before{transform:translate(-50%,-50%) rotate(180deg)}
+.hero-next::before,.music-next::before,.soundcloud-next::before,.soundcloud-lane-next::before,.about-next::before,.album-page-next::before{transform:translate(-50%,-50%)}
 
 /* The final spread fades out at its fixed size when the album wraps to Cover. */
 body.album-ready.is-wrapping-forward #booking.album-page.is-before{
