@@ -2011,7 +2011,7 @@ body.album-mode .about-gallery-stack{width:min(100%,360px);margin-inline:auto}
   .music-panel .music-prev,.music-panel .music-next{display:none!important}
   .music-selected-player{overflow:hidden!important}
   .music-selected-player iframe{
-    display:block!important;width:100%!important;height:180px!important;
+    display:block!important;width:100%!important;height:152px!important;
     margin:0!important;border-radius:14px!important;clip-path:none!important;
   }
 }
