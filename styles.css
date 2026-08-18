@@ -2012,6 +2012,9 @@ body.album-mode .about-gallery-stack{width:min(100%,360px);margin-inline:auto}
 .hero-prev::before,.music-prev::before,.soundcloud-prev::before,.soundcloud-lane-prev::before,.about-prev::before,.album-page-prev::before{transform:translate(-50%,-50%) rotate(180deg)}
 .hero-next::before,.music-next::before,.soundcloud-next::before,.soundcloud-lane-next::before,.about-next::before,.album-page-next::before{transform:translate(-50%,-50%)}
 
+/* Photo gallery is controlled by swipe and the thumbnail strip. */
+.about-prev,.about-next{display:none!important}
+
 /* Mobile music is swipe-only; give the official Spotify player enough room. */
 @media(max-width:760px){
   .music-panel .music-prev,.music-panel .music-next{display:none!important}
