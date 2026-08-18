@@ -1721,19 +1721,22 @@ body.intro-active{overflow:hidden!important}
 .site-intro{
   position:fixed;inset:0;z-index:2000;display:grid;place-items:center;
   overflow:hidden;background:#000;color:#f8f7ff;
-  opacity:1;visibility:visible;transition:opacity .85s cubic-bezier(.4,0,.2,1),visibility 0s linear .85s;
+  opacity:1;visibility:visible;contain:strict;transform:translateZ(0);will-change:opacity;
+  transition:opacity .68s cubic-bezier(.4,0,.2,1),visibility 0s linear .68s;
 }
 .site-intro:before{
   content:"";position:absolute;inset:-20%;opacity:.34;
   background:
     radial-gradient(circle at 50% 50%,rgba(122,101,255,.14),transparent 25%),
     linear-gradient(112deg,transparent 35%,rgba(91,132,255,.05) 48%,rgba(196,174,255,.12) 50%,transparent 54%);
-  animation:introPrism 5s ease-in-out both;
+  animation:introPrism 5s ease-in-out both;transition:opacity .34s ease;
 }
+.site-intro.is-blackout:before{opacity:0!important;animation-play-state:paused}
+.site-intro.is-blackout .site-intro-mark{opacity:0}
 .site-intro.is-leaving{opacity:0;visibility:hidden;pointer-events:none}
 .site-intro-mark{
   position:relative;display:grid;place-items:center;width:min(68vw,720px);aspect-ratio:1;
-  animation:none;
+  animation:none;transition:opacity .34s ease;will-change:opacity;
 }
 .site-intro-mark span{
   position:relative;z-index:2;color:#fff;
@@ -1832,8 +1835,8 @@ body.album-ready.is-page-turning[data-album-direction="backward"] .album-page.is
   width:103vw!important;right:-38%!important;top:-5%!important;
   opacity:1!important;
   border:0!important;box-shadow:none!important;
-  transform-origin:50% 50%;will-change:transform;
-  animation:heroGlassOrbitSpin 12s linear infinite!important;
+  transform-origin:50% 50%;will-change:transform;backface-visibility:hidden;contain:paint;
+  animation:heroGlassOrbitSpin 20s linear infinite!important;
 }
 .hero-panel .hero-orbit-one:before{
   content:"";position:absolute;inset:-10px;border-radius:50%;padding:14px;
@@ -1846,8 +1849,8 @@ body.album-ready.is-page-turning[data-album-direction="backward"] .album-page.is
   -webkit-mask-composite:xor;mask-composite:exclude;
   opacity:.72;mix-blend-mode:screen;
   filter:blur(.25px) drop-shadow(0 0 8px rgba(132,111,255,.28));
-  transform-origin:50% 50%;will-change:transform,filter;
-  animation:heroGlassRingSpin 9s linear infinite reverse!important;
+  transform-origin:50% 50%;will-change:auto;
+  animation:none!important;
 }
 .hero-panel .hero-orbit-one:after{
   content:"";position:absolute;inset:2px;border-radius:50%;padding:5px;
@@ -1856,21 +1859,26 @@ body.album-ready.is-page-turning[data-album-direction="backward"] .album-page.is
   -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
   -webkit-mask-composite:xor;mask-composite:exclude;
   mix-blend-mode:screen;
-  transform-origin:50% 50%;will-change:transform,opacity;
-  animation:heroGlassRingCounterSpin 13s linear infinite,heroGlassRingBreath 6.5s ease-in-out infinite alternate!important;
+  transform-origin:50% 50%;will-change:opacity;
+  animation:heroGlassRingBreath 7s ease-in-out infinite alternate!important;
 }
 @keyframes heroGlassOrbitSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 @keyframes heroGlassRingSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 @keyframes heroGlassRingCounterSpin{from{transform:rotate(360deg)}to{transform:rotate(0deg)}}
 @keyframes heroGlassRingBreath{
-  from{opacity:.22;filter:drop-shadow(0 0 3px rgba(103,87,255,.08))}
-  to{opacity:.62;filter:drop-shadow(0 0 10px rgba(155,139,255,.28))}
+  from{opacity:.22}
+  to{opacity:.58}
 }
+body.intro-active .hero-stars,
+body.intro-active .hero-prism-sweep,
+body.intro-active .hero-panel .hero-orbit-one,
+body.intro-active .hero-panel .hero-orbit-one:before,
+body.intro-active .hero-panel .hero-orbit-one:after{animation-play-state:paused!important}
 /* This single slow brand motion stays active even when the OS reduces other page motion. */
 @media(prefers-reduced-motion:reduce){
   .hero-panel .hero-orbit-one{animation:heroGlassOrbitSpin 18s linear infinite!important}
-  .hero-panel .hero-orbit-one:before{animation:heroGlassRingSpin 14s linear infinite reverse!important}
-  .hero-panel .hero-orbit-one:after{animation:heroGlassRingCounterSpin 19s linear infinite!important}
+  .hero-panel .hero-orbit-one:before{animation:none!important}
+  .hero-panel .hero-orbit-one:after{animation:heroGlassRingBreath 9s ease-in-out infinite alternate!important}
 }
 @media(max-width:760px){
   .hero-panel .hero-orbit-one{width:112vw!important;right:-44%!important;top:4%!important}

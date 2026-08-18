@@ -1,6 +1,7 @@
 const menuButton = document.querySelector('.menu-toggle');
 let siteIntro = document.querySelector('.site-intro');
 let siteIntroTimer = 0;
+let siteIntroBlackoutTimer = 0;
 let siteIntroLeaveTimer = 0;
 
 const playSiteIntro = (onReveal) => {
@@ -10,23 +11,29 @@ const playSiteIntro = (onReveal) => {
   }
 
   window.clearTimeout(siteIntroTimer);
+  window.clearTimeout(siteIntroBlackoutTimer);
   window.clearTimeout(siteIntroLeaveTimer);
 
   /* Replacing the small intro layer reliably restarts every ring/text animation in Safari. */
   const restartedIntro = siteIntro.cloneNode(true);
   siteIntro.replaceWith(restartedIntro);
   siteIntro = restartedIntro;
-  siteIntro.classList.remove('is-leaving');
+  siteIntro.classList.remove('is-blackout', 'is-leaving');
   siteIntro.setAttribute('aria-hidden', 'false');
   document.body.classList.add('intro-active');
 
+  /* Let the title disappear first, leaving a clean black frame before the cover is revealed. */
+  siteIntroBlackoutTimer = window.setTimeout(() => {
+    siteIntro.classList.add('is-blackout');
+  }, 4400);
+
   siteIntroTimer = window.setTimeout(() => {
     if (onReveal) onReveal();
-    siteIntro.classList.add('is-leaving');
-    document.body.classList.remove('intro-active');
+    window.requestAnimationFrame(() => siteIntro.classList.add('is-leaving'));
     siteIntroLeaveTimer = window.setTimeout(() => {
       siteIntro.setAttribute('aria-hidden', 'true');
-    }, 900);
+      document.body.classList.remove('intro-active');
+    }, 720);
   }, 5000);
 };
 
