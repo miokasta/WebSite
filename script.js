@@ -1,4 +1,37 @@
 const menuButton = document.querySelector('.menu-toggle');
+let siteIntro = document.querySelector('.site-intro');
+let siteIntroTimer = 0;
+let siteIntroLeaveTimer = 0;
+
+const playSiteIntro = (onReveal) => {
+  if (!siteIntro) {
+    if (onReveal) onReveal();
+    return;
+  }
+
+  window.clearTimeout(siteIntroTimer);
+  window.clearTimeout(siteIntroLeaveTimer);
+
+  /* Replacing the small intro layer reliably restarts every ring/text animation in Safari. */
+  const restartedIntro = siteIntro.cloneNode(true);
+  siteIntro.replaceWith(restartedIntro);
+  siteIntro = restartedIntro;
+  siteIntro.classList.remove('is-leaving');
+  siteIntro.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('intro-active');
+
+  siteIntroTimer = window.setTimeout(() => {
+    if (onReveal) onReveal();
+    siteIntro.classList.add('is-leaving');
+    document.body.classList.remove('intro-active');
+    siteIntroLeaveTimer = window.setTimeout(() => {
+      siteIntro.setAttribute('aria-hidden', 'true');
+    }, 900);
+  }, 5000);
+};
+
+playSiteIntro();
+
 const navigation = document.querySelector('.site-nav');
 const siteHeader = document.querySelector('.site-header');
 const navigationLinks = [...navigation.querySelectorAll('a[href^="#"]')];
@@ -282,7 +315,7 @@ if (youtubeFrames.length) {
 }
 
 const videoGalleryTrack = document.querySelector('.video-gallery-track');
-if (videoGalleryTrack) {
+if (videoGalleryTrack && !videoGalleryTrack.classList.contains('video-stack')) {
   const videoGalleryCards = [...videoGalleryTrack.querySelectorAll('.video-gallery-card')];
   const videoGalleryDots = [...document.querySelectorAll('.video-gallery-pagination i')];
   let videoGalleryIndex = 0;
@@ -369,8 +402,6 @@ if (videoGalleryTrack) {
 const soundcloudTrack = document.querySelector('.soundcloud-track');
 if (soundcloudTrack) {
   const soundcloudCards = [...soundcloudTrack.querySelectorAll('.soundcloud-track-card')];
-  const soundcloudDots = [...document.querySelectorAll('.soundcloud-pagination i')];
-  let soundcloudScrollFrame;
   soundcloudCards.forEach((card) => {
     const player = card.querySelector('iframe');
     const source = player?.getAttribute('src');
@@ -383,37 +414,72 @@ if (soundcloudTrack) {
       if (withArtwork !== source) player.setAttribute('src', withArtwork);
     }
   });
-  let soundcloudIndex = 0;
 
-  const selectSoundcloudCard = (index) => {
-    soundcloudIndex = (index + soundcloudCards.length) % soundcloudCards.length;
-    const card = soundcloudCards[soundcloudIndex];
-    soundcloudCards.forEach((item, itemIndex) => item.classList.toggle('active', itemIndex === soundcloudIndex));
-    soundcloudDots.forEach((dot, dotIndex) => dot.classList.toggle('active', dotIndex === soundcloudIndex));
-    soundcloudTrack.scrollTo({ left: card.offsetLeft - soundcloudTrack.offsetLeft, behavior: 'smooth' });
-  };
+  const soundcloudCarousel = soundcloudTrack.closest('.soundcloud-carousel');
+  const soundcloudPagination = document.querySelector('.soundcloud-pagination');
+  const laneNames = ['Most played', 'Remix archive', 'Deep cuts'];
+  const cardsPerLane = Math.ceil(soundcloudCards.length / laneNames.length);
+  const laneFragment = document.createDocumentFragment();
 
-  soundcloudCards.forEach((card, index) => card.addEventListener('focusin', () => {
-    soundcloudIndex = index;
-    soundcloudCards.forEach((item, itemIndex) => item.classList.toggle('active', itemIndex === index));
-    soundcloudDots.forEach((dot, dotIndex) => dot.classList.toggle('active', dotIndex === index));
-  }));
-  soundcloudTrack.addEventListener('scroll', () => {
-    cancelAnimationFrame(soundcloudScrollFrame);
-    soundcloudScrollFrame = requestAnimationFrame(() => {
-      const currentLeft = soundcloudTrack.scrollLeft;
-      const nearestIndex = soundcloudCards.reduce((nearest, card, index) => {
-        const nearestDistance = Math.abs((soundcloudCards[nearest].offsetLeft - soundcloudTrack.offsetLeft) - currentLeft);
-        const distance = Math.abs((card.offsetLeft - soundcloudTrack.offsetLeft) - currentLeft);
-        return distance < nearestDistance ? index : nearest;
-      }, 0);
-      soundcloudIndex = nearestIndex;
-      soundcloudCards.forEach((item, itemIndex) => item.classList.toggle('active', itemIndex === nearestIndex));
-      soundcloudDots.forEach((dot, dotIndex) => dot.classList.toggle('active', dotIndex === nearestIndex));
+  laneNames.forEach((laneName, laneIndex) => {
+    const laneCards = soundcloudCards.slice(laneIndex * cardsPerLane, (laneIndex + 1) * cardsPerLane);
+    if (!laneCards.length) return;
+
+    const lane = document.createElement('section');
+    lane.className = 'soundcloud-lane';
+    lane.setAttribute('aria-label', `${laneName} SoundCloud carousel`);
+    lane.innerHTML = `
+      <div class="soundcloud-lane-heading">
+        <h3><span>0${laneIndex + 1}</span>${laneName}</h3>
+        <b><span>01</span> / ${String(laneCards.length).padStart(2, '0')}</b>
+      </div>
+      <div class="soundcloud-lane-body">
+        <button class="circle-arrow soundcloud-lane-prev" type="button" aria-label="Previous ${laneName} track">‹</button>
+        <div class="soundcloud-lane-track" tabindex="0"></div>
+        <button class="circle-arrow soundcloud-lane-next" type="button" aria-label="Next ${laneName} track">›</button>
+      </div>`;
+
+    const laneTrack = lane.querySelector('.soundcloud-lane-track');
+    const laneCounter = lane.querySelector('.soundcloud-lane-heading b span');
+    let laneCardIndex = 0;
+    let laneScrollFrame;
+    laneCards.forEach((card, cardIndex) => {
+      card.classList.toggle('active', cardIndex === 0);
+      laneTrack.appendChild(card);
     });
-  }, { passive: true });
-  document.querySelector('.soundcloud-prev').addEventListener('click', () => selectSoundcloudCard(soundcloudIndex - 1));
-  document.querySelector('.soundcloud-next').addEventListener('click', () => selectSoundcloudCard(soundcloudIndex + 1));
+
+    const updateLane = (nextIndex, scroll = true) => {
+      laneCardIndex = (nextIndex + laneCards.length) % laneCards.length;
+      laneCards.forEach((card, cardIndex) => card.classList.toggle('active', cardIndex === laneCardIndex));
+      laneCounter.textContent = String(laneCardIndex + 1).padStart(2, '0');
+      if (scroll) {
+        const card = laneCards[laneCardIndex];
+        laneTrack.scrollTo({ left: card.offsetLeft - laneTrack.offsetLeft, behavior: 'smooth' });
+      }
+    };
+
+    lane.querySelector('.soundcloud-lane-prev').addEventListener('click', () => updateLane(laneCardIndex - 1));
+    lane.querySelector('.soundcloud-lane-next').addEventListener('click', () => updateLane(laneCardIndex + 1));
+    laneCards.forEach((card, cardIndex) => card.addEventListener('focusin', () => updateLane(cardIndex, false)));
+    laneTrack.addEventListener('scroll', () => {
+      cancelAnimationFrame(laneScrollFrame);
+      laneScrollFrame = requestAnimationFrame(() => {
+        const currentLeft = laneTrack.scrollLeft;
+        const nearestIndex = laneCards.reduce((nearest, card, cardIndex) => {
+          const nearestDistance = Math.abs((laneCards[nearest].offsetLeft - laneTrack.offsetLeft) - currentLeft);
+          const distance = Math.abs((card.offsetLeft - laneTrack.offsetLeft) - currentLeft);
+          return distance < nearestDistance ? cardIndex : nearest;
+        }, 0);
+        updateLane(nearestIndex, false);
+      });
+    }, { passive: true });
+
+    laneFragment.appendChild(lane);
+  });
+
+  soundcloudCarousel.classList.add('soundcloud-multi');
+  soundcloudCarousel.replaceChildren(laneFragment);
+  soundcloudPagination?.remove();
 }
 
 const aboutGallery = document.querySelector('.about-gallery');
@@ -421,14 +487,50 @@ if (aboutGallery) {
   const aboutTrack = aboutGallery.querySelector('.about-photo-track');
   const aboutSlides = [...aboutGallery.querySelectorAll('.about-photo')];
   const aboutNumber = aboutGallery.querySelector('.about-counter span');
+  const aboutThumbnailStrip = document.querySelector('.about-thumbnail-strip');
   let aboutIndex = 0;
   let aboutSwipeX = 0;
   let aboutTimer;
+  const aboutThumbs = aboutSlides.map((slide, index) => {
+    const button = document.createElement('button');
+    const sourceImage = slide.querySelector('img');
+    button.type = 'button';
+    button.className = 'about-thumbnail';
+    button.setAttribute('aria-label', `Show Instagram photo ${index + 1}`);
+    button.innerHTML = `<img src="${sourceImage.src}" alt="">`;
+    button.addEventListener('click', () => {
+      showAboutPhoto(index);
+      startAboutCarousel();
+    });
+    aboutThumbnailStrip?.appendChild(button);
+    return button;
+  });
 
   const showAboutPhoto = (index) => {
     aboutIndex = (index + aboutSlides.length) % aboutSlides.length;
-    aboutTrack.style.transform = `translateX(-${aboutIndex * 100}%)`;
-    aboutSlides.forEach((slide, slideIndex) => slide.classList.toggle('active', slideIndex === aboutIndex));
+    const previousIndex = (aboutIndex - 1 + aboutSlides.length) % aboutSlides.length;
+    const nextIndex = (aboutIndex + 1) % aboutSlides.length;
+    aboutTrack.style.transform = 'none';
+    aboutSlides.forEach((slide, slideIndex) => {
+      const isActive = slideIndex === aboutIndex;
+      slide.classList.toggle('active', isActive);
+      slide.classList.toggle('is-preview-prev', slideIndex === previousIndex);
+      slide.classList.toggle('is-preview-next', slideIndex === nextIndex);
+      slide.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+      slide.tabIndex = isActive ? 0 : -1;
+    });
+    aboutThumbs.forEach((thumb, thumbIndex) => {
+      const isActive = thumbIndex === aboutIndex;
+      thumb.classList.toggle('active', isActive);
+      thumb.setAttribute('aria-current', isActive ? 'true' : 'false');
+    });
+    const activeThumb = aboutThumbs[aboutIndex];
+    if (activeThumb && aboutThumbnailStrip) {
+      aboutThumbnailStrip.scrollTo({
+        left: activeThumb.offsetLeft - (aboutThumbnailStrip.clientWidth - activeThumb.clientWidth) / 2,
+        behavior: 'smooth'
+      });
+    }
     aboutNumber.textContent = String(aboutIndex + 1).padStart(2, '0');
   };
   const startAboutCarousel = () => {
@@ -455,5 +557,271 @@ if (aboutGallery) {
     if (Math.abs(distance) > 45) showAboutPhoto(aboutIndex + (distance < 0 ? 1 : -1));
     startAboutCarousel();
   }, { passive: true });
+  showAboutPhoto(0);
+  showAboutPhoto(0);
   startAboutCarousel();
+}
+
+/* Album navigation: each major section behaves like a separate page. */
+const albumShell = document.querySelector('#album');
+const albumControls = document.querySelector('.album-controls');
+if (albumShell && albumControls) {
+  document.body.classList.add('album-mode');
+
+  const albumPages = [...albumShell.querySelectorAll(':scope > section'), document.querySelector('#booking')].filter(Boolean);
+  const albumNumber = albumControls.querySelector('.album-page-number b');
+  const albumTotal = albumControls.querySelector('.album-page-number em');
+  const albumTitle = albumControls.querySelector('.album-page-title');
+  const albumPrev = albumControls.querySelector('.album-page-prev');
+  const albumNext = albumControls.querySelector('.album-page-next');
+  const albumNavGroups = {
+    home: '#home', latest: '#home', music: '#music', remixes: '#music',
+    videos: '#videos', about: '#videos', community: '#booking', booking: '#booking'
+  };
+  let albumIndex = 0;
+  let albumLocked = false;
+  let albumTouchX = 0;
+  let albumTouchY = 0;
+  let albumTouchScrollTop = 0;
+  let albumTouchPageIndex = 0;
+  let albumLastWheelAt = 0;
+  let albumPageHoldUntil = 0;
+  let albumExitArmPage = -1;
+  let albumExitArmDirection = 0;
+  let albumExitArmExpires = 0;
+  let albumExitCueTimer = 0;
+  let albumTurnTimer = 0;
+  let albumUnlockTimer = 0;
+  let albumTransitionReadyAt = 0;
+  let albumWrapCleanupTimer = 0;
+
+  albumPages.forEach((page, index) => {
+    page.classList.add('album-page');
+    page.setAttribute('aria-hidden', index === 0 ? 'false' : 'true');
+  });
+  albumTotal.textContent = String(albumPages.length).padStart(2, '0');
+
+  const pageForHash = (hash) => {
+    const target = hash && document.querySelector(hash);
+    if (!target) return null;
+    return target.classList.contains('album-page') ? target : target.closest('.album-page');
+  };
+
+  const syncAlbumNavigation = (page) => {
+    const pageKey = page.id || 'home';
+    const navHash = albumNavGroups[pageKey] || '#home';
+    const navLink = navigationLinks.find((link) => link.hash === navHash);
+    if (navLink) setActiveNavigation(navLink);
+  };
+
+  const scheduleAlbumUnlock = () => {
+    window.clearTimeout(albumUnlockTimer);
+    const transitionWait = Math.max(0, albumTransitionReadyAt - Date.now());
+    const wheelWait = Math.max(0, 420 - (Date.now() - albumLastWheelAt));
+    const wait = Math.max(transitionWait, wheelWait);
+    albumUnlockTimer = window.setTimeout(() => {
+      const stillReceivingWheelMomentum = Date.now() - albumLastWheelAt < 420;
+      if (Date.now() < albumTransitionReadyAt || stillReceivingWheelMomentum) {
+        scheduleAlbumUnlock();
+        return;
+      }
+      albumLocked = false;
+    }, Math.max(24, wait));
+  };
+
+  const resetAlbumExitArm = () => {
+    albumExitArmPage = -1;
+    albumExitArmDirection = 0;
+    albumExitArmExpires = 0;
+    document.body.classList.remove('is-album-paused');
+    window.clearTimeout(albumExitCueTimer);
+  };
+
+  const confirmAlbumExit = (direction, isFreshGesture = true) => {
+    if (direction < 0 && albumIndex === 0) return false;
+    const now = Date.now();
+    const sameArmedExit = albumExitArmPage === albumIndex
+      && albumExitArmDirection === direction
+      && now < albumExitArmExpires;
+    if (sameArmedExit) return isFreshGesture;
+    albumExitArmPage = albumIndex;
+    albumExitArmDirection = direction;
+    albumExitArmExpires = now + 2400;
+    document.body.classList.remove('is-album-paused');
+    void document.body.offsetWidth;
+    document.body.classList.add('is-album-paused');
+    window.clearTimeout(albumExitCueTimer);
+    albumExitCueTimer = window.setTimeout(() => {
+      document.body.classList.remove('is-album-paused');
+    }, 720);
+    return false;
+  };
+
+  const showAlbumPage = (nextIndex, options = {}) => {
+    const previousIndex = albumIndex;
+    const wrapsForward = nextIndex >= albumPages.length;
+    const normalizedIndex = wrapsForward
+      ? 0
+      : Math.max(0, Math.min(albumPages.length - 1, nextIndex));
+    if (normalizedIndex === albumIndex && document.body.classList.contains('album-ready')) return;
+
+    const direction = wrapsForward || normalizedIndex >= albumIndex ? 1 : -1;
+    const directionName = direction > 0 ? 'forward' : 'backward';
+    albumIndex = normalizedIndex;
+    resetAlbumExitArm();
+    albumShell.dataset.direction = directionName;
+    document.body.dataset.albumDirection = directionName;
+    document.body.classList.toggle('is-wrapping-forward', wrapsForward);
+    document.body.classList.remove('is-page-turning');
+    void document.body.offsetWidth;
+    document.body.classList.add('is-page-turning');
+    window.clearTimeout(albumTurnTimer);
+    albumTurnTimer = window.setTimeout(() => {
+      document.body.classList.remove('is-page-turning');
+      document.body.classList.remove('is-wrapping-forward');
+    }, 1100);
+    albumPages.forEach((page, index) => {
+      const isActive = index === albumIndex;
+      const isBefore = wrapsForward ? !isActive : index < albumIndex;
+      page.classList.toggle('is-wrap-source', wrapsForward && index === previousIndex);
+      page.classList.toggle('is-active', isActive);
+      page.classList.toggle('is-before', isBefore);
+      page.classList.toggle('is-after', !wrapsForward && index > albumIndex);
+      page.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+      window.clearTimeout(page.albumVisibilityTimer);
+      page.style.opacity = isActive ? '1' : '0';
+      page.style.visibility = 'visible';
+      page.style.pointerEvents = isActive ? 'auto' : 'none';
+      page.style.zIndex = isActive ? '100' : '1';
+      page.style.transform = isActive
+        ? 'translate3d(0,0,0) rotateY(0deg)'
+        : isBefore
+          ? 'translate3d(-32%,0,-240px) rotateY(68deg) scale(.96)'
+          : 'translate3d(32%,0,-240px) rotateY(-68deg) scale(.96)';
+      page.style.filter = isActive ? 'none' : 'brightness(.32) saturate(.68) blur(.8px)';
+      if (isActive) page.scrollTop = 0;
+      else page.albumVisibilityTimer = window.setTimeout(() => {
+        if (!page.classList.contains('is-active')) page.style.visibility = 'hidden';
+      }, 1100);
+    });
+    window.clearTimeout(albumWrapCleanupTimer);
+    albumWrapCleanupTimer = window.setTimeout(() => {
+      albumPages.forEach((page) => page.classList.remove('is-wrap-source'));
+    }, 1250);
+
+    const activePage = albumPages[albumIndex];
+    albumPageHoldUntil = Date.now() + (activePage.id === 'videos' ? 2200 : activePage.id === 'remixes' ? 1800 : 1400);
+    albumNumber.textContent = String(albumIndex + 1).padStart(2, '0');
+    albumTitle.textContent = activePage.dataset.albumTitle || activePage.id || 'Page';
+    albumPrev.disabled = albumIndex === 0;
+    albumNext.disabled = false;
+    syncAlbumNavigation(activePage);
+
+    if (options.updateHash !== false && activePage.id) {
+      history.replaceState(null, '', `#${activePage.id}`);
+    }
+
+    albumLocked = true;
+    albumTransitionReadyAt = Date.now() + 1080;
+    scheduleAlbumUnlock();
+  };
+
+  const pageCanScroll = (page, direction) => {
+    if (page.scrollHeight <= page.clientHeight + 4) return false;
+    if (direction > 0) return page.scrollTop + page.clientHeight < page.scrollHeight - 4;
+    return page.scrollTop > 4;
+  };
+
+  const turnAlbumPage = (direction) => {
+    if (albumLocked) return;
+    const wrapsToCover = direction > 0 && albumIndex === albumPages.length - 1;
+    if (wrapsToCover) {
+      albumLocked = true;
+      resetAlbumExitArm();
+      playSiteIntro(() => {
+        albumLocked = false;
+        showAlbumPage(albumPages.length);
+      });
+      return;
+    }
+    showAlbumPage(albumIndex + direction);
+  };
+
+  albumPrev.addEventListener('click', () => turnAlbumPage(-1));
+  albumNext.addEventListener('click', () => turnAlbumPage(1));
+
+  document.addEventListener('click', (event) => {
+    const link = event.target.closest('a[href^="#"]');
+    if (!link) return;
+    const targetPage = pageForHash(link.hash);
+    if (!targetPage) return;
+    event.preventDefault();
+    const targetIndex = albumPages.indexOf(targetPage);
+    if (targetIndex >= 0) showAlbumPage(targetIndex);
+    navigation.classList.remove('open');
+    menuButton.setAttribute('aria-expanded', 'false');
+  });
+
+  window.addEventListener('wheel', (event) => {
+    if (Math.abs(event.deltaX) > Math.abs(event.deltaY) || Math.abs(event.deltaY) < 18) return;
+    if (event.target.closest('iframe,input,textarea,select')) return;
+    const direction = event.deltaY > 0 ? 1 : -1;
+    const activePage = albumPages[albumIndex];
+    if (pageCanScroll(activePage, direction)) return;
+    event.preventDefault();
+    const now = Date.now();
+    const isFreshGesture = now - albumLastWheelAt > 240;
+    albumLastWheelAt = now;
+    if (albumLocked) {
+      scheduleAlbumUnlock();
+      return;
+    }
+    if (now < albumPageHoldUntil) return;
+    if (!confirmAlbumExit(direction, isFreshGesture)) return;
+    turnAlbumPage(direction);
+  }, { passive: false });
+
+  window.addEventListener('keydown', (event) => {
+    if (event.target.matches('input,textarea,select') || event.target.closest('iframe')) return;
+    if (['ArrowDown', 'PageDown'].includes(event.key) || (event.key === ' ' && !event.shiftKey)) {
+      event.preventDefault();
+      turnAlbumPage(1);
+    }
+    if (['ArrowUp', 'PageUp'].includes(event.key) || (event.key === ' ' && event.shiftKey)) {
+      event.preventDefault();
+      turnAlbumPage(-1);
+    }
+  });
+
+  window.addEventListener('touchstart', (event) => {
+    albumTouchX = event.touches[0].clientX;
+    albumTouchY = event.touches[0].clientY;
+    albumTouchPageIndex = albumIndex;
+    albumTouchScrollTop = albumPages[albumIndex].scrollTop;
+  }, { passive: true });
+  window.addEventListener('touchend', (event) => {
+    const deltaX = event.changedTouches[0].clientX - albumTouchX;
+    const deltaY = event.changedTouches[0].clientY - albumTouchY;
+    if (Math.abs(deltaY) < 55 || Math.abs(deltaY) <= Math.abs(deltaX)) return;
+    const direction = deltaY < 0 ? 1 : -1;
+    const activePage = albumPages[albumIndex];
+    const startedOnCurrentPage = albumTouchPageIndex === albumIndex;
+    const couldScrollAtGestureStart = direction > 0
+      ? albumTouchScrollTop + activePage.clientHeight < activePage.scrollHeight - 4
+      : albumTouchScrollTop > 4;
+    if (Date.now() < albumPageHoldUntil) return;
+    if (startedOnCurrentPage && couldScrollAtGestureStart) return;
+    if (!pageCanScroll(activePage, direction) && confirmAlbumExit(direction)) turnAlbumPage(direction);
+  }, { passive: true });
+
+  window.addEventListener('hashchange', () => {
+    const targetPage = pageForHash(window.location.hash);
+    const targetIndex = albumPages.indexOf(targetPage);
+    if (targetIndex >= 0) showAlbumPage(targetIndex, { updateHash: false });
+  });
+
+  const initialPage = pageForHash(window.location.hash);
+  const initialIndex = albumPages.indexOf(initialPage);
+  showAlbumPage(initialIndex >= 0 ? initialIndex : 0, { updateHash: false });
+  requestAnimationFrame(() => document.body.classList.add('album-ready'));
 }
