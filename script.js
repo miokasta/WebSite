@@ -1,16 +1,18 @@
 const menuButton = document.querySelector('.menu-toggle');
 let siteIntro = document.querySelector('.site-intro');
 let siteIntroTimer = 0;
+let siteIntroPrepareTimer = 0;
 let siteIntroBlackoutTimer = 0;
 let siteIntroLeaveTimer = 0;
 
-const playSiteIntro = (onReveal) => {
+const playSiteIntro = (onReveal, onPrepare) => {
   if (!siteIntro) {
     if (onReveal) onReveal();
     return;
   }
 
   window.clearTimeout(siteIntroTimer);
+  window.clearTimeout(siteIntroPrepareTimer);
   window.clearTimeout(siteIntroBlackoutTimer);
   window.clearTimeout(siteIntroLeaveTimer);
 
@@ -21,6 +23,11 @@ const playSiteIntro = (onReveal) => {
   siteIntro.classList.remove('is-blackout', 'is-leaving');
   siteIntro.setAttribute('aria-hidden', 'false');
   document.body.classList.add('intro-active');
+
+  /* Prepare the next cover while the opaque intro still completely hides the album. */
+  siteIntroPrepareTimer = window.setTimeout(() => {
+    if (onPrepare) onPrepare();
+  }, 3850);
 
   /* Let the title disappear first, leaving a clean black frame before the cover is revealed. */
   siteIntroBlackoutTimer = window.setTimeout(() => {
@@ -745,10 +752,10 @@ if (albumShell && albumControls) {
     if (wrapsToCover) {
       albumLocked = true;
       resetAlbumExitArm();
-      playSiteIntro(() => {
-        albumLocked = false;
-        showAlbumPage(albumPages.length);
-      });
+      playSiteIntro(
+        () => { albumLocked = false; },
+        () => { showAlbumPage(albumPages.length); }
+      );
       return;
     }
     showAlbumPage(albumIndex + direction);
