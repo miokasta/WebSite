@@ -2006,6 +2006,16 @@ body.album-mode .about-gallery-stack{width:min(100%,360px);margin-inline:auto}
 .hero-prev::before,.music-prev::before,.soundcloud-prev::before,.soundcloud-lane-prev::before,.about-prev::before,.album-page-prev::before{transform:translate(-50%,-50%) rotate(180deg)}
 .hero-next::before,.music-next::before,.soundcloud-next::before,.soundcloud-lane-next::before,.about-next::before,.album-page-next::before{transform:translate(-50%,-50%)}
 
+/* Mobile music is swipe-only; give the official Spotify player enough room. */
+@media(max-width:760px){
+  .music-panel .music-prev,.music-panel .music-next{display:none!important}
+  .music-selected-player{overflow:hidden!important}
+  .music-selected-player iframe{
+    display:block!important;width:100%!important;height:180px!important;
+    margin:0!important;border-radius:14px!important;clip-path:none!important;
+  }
+}
+
 /* The final spread fades out at its fixed size when the album wraps to Cover. */
 body.album-ready.is-wrapping-forward #booking.album-page.is-before{
   transform:translate3d(0,0,0) rotateY(0deg)!important;
