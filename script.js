@@ -178,7 +178,7 @@ document.querySelector('.hero-next').addEventListener('click', () => updateHero(
 document.querySelector('#newsletter-form').addEventListener('submit', (event) => {
   event.preventDefault();
   const email = document.querySelector('#email');
-  document.querySelector('#form-message').textContent = `You're in — updates will be sent to ${email.value}.`;
+  document.querySelector('#form-message').textContent = 'Newsletter signup is coming soon. Your address has not been stored.';
   event.target.reset();
 });
 

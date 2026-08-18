@@ -2144,3 +2144,21 @@ body.is-album-paused .album-controls{
   0%,100%{border-color:rgba(205,198,255,.18);box-shadow:0 14px 38px rgba(0,0,0,.38),inset 0 1px rgba(255,255,255,.04)}
   48%{border-color:rgba(205,198,255,.72);box-shadow:0 14px 38px rgba(0,0,0,.38),0 0 24px rgba(145,124,255,.38),inset 0 0 16px rgba(153,135,255,.11)}
 }
+
+/* Footer hierarchy: larger section labels after removing the extra contact CTA. */
+body.album-mode #booking.site-footer h3{
+  margin-bottom:18px!important;
+  font-size:clamp(13px,1.15vw,17px)!important;
+  font-weight:500!important;
+  line-height:1.2!important;
+  letter-spacing:.08em!important;
+}
+@media(max-width:760px){
+  body.album-mode #booking.site-footer h3{
+    margin-bottom:9px!important;
+    font-size:12px!important;
+  }
+}
+@media(max-width:340px){
+  body.album-mode #booking.site-footer h3{font-size:9px!important}
+}
