@@ -1832,7 +1832,9 @@ body.album-ready.is-page-turning[data-album-direction="backward"] .album-page.is
 
 /* Cover glass ring: fixed geometry, rotating refraction only. */
 .hero-panel .hero-orbit-one{
-  width:103vw!important;right:-38%!important;top:-5%!important;
+  width:clamp(230px,25vw,380px)!important;
+  left:auto!important;right:clamp(28px,4vw,72px)!important;
+  top:auto!important;bottom:clamp(28px,5vh,62px)!important;
   opacity:1!important;
   border:0!important;box-shadow:none!important;
   transform-origin:50% 50%;will-change:transform;backface-visibility:hidden;contain:paint;
@@ -1881,7 +1883,11 @@ body.intro-active .hero-panel .hero-orbit-one:after{animation-play-state:paused!
   .hero-panel .hero-orbit-one:after{animation:heroGlassRingBreath 9s ease-in-out infinite alternate!important}
 }
 @media(max-width:760px){
-  .hero-panel .hero-orbit-one{width:112vw!important;right:-44%!important;top:4%!important}
+  .hero-panel .hero-orbit-one{
+    width:min(48vw,190px)!important;
+    left:auto!important;right:18px!important;
+    top:auto!important;bottom:54px!important;
+  }
   .hero-panel .hero-orbit-one:before{inset:-7px;padding:10px}
   .hero-panel .hero-orbit-one:after{inset:1px;padding:4px}
 }
